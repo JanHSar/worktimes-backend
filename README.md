@@ -17,3 +17,11 @@ Die Datenbank und das Schema müssen bereits erstellt sein, anschließend könne
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
+
+Vordefinierte Benutzer sind: 
+  
+    Name: Hans
+    Passwort: wdUser
+
+    Name: Julia
+    Passwort: wdUser
