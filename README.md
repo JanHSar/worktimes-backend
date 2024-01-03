@@ -2,6 +2,8 @@
 
 Die Konfiguration der Datenbankverbindung befindet sich in der Datei `config/config.json`. Voreingestellt ist eine Verbindung zu eine PostgreSQL Datenbank.
 
+Das Diagramm befindet sich als pdf in diesem Dokument `Datenbankdiagramm.pdf`
+
 ```
 "username": "postgres",
 "password": null,
