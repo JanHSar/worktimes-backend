@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class workTimes extends Model {
 
     static associate(models) {
-      // Wortime belongs to user
-      this.belongsTo(models.User, {'targetKey': 'id'})
+      // Worktime belongs to user
+      this.belongsTo(models.user, {'targetKey': 'id'})
     }
   }
   workTimes.init({
