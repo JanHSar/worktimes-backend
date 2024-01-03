@@ -2,10 +2,23 @@ var express = require('express');
 var router = express.Router();
 var { Op } = require('sequelize');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  
-  const workTimes = req.db.workTimes.findAll({});
+/* 
+ * GET work times listing for day
+*/
+router.get('/', async function(req, res, next) {
+
+  const requestedDate = new Date(req.query.year, req.query.month - 1, req.query.day).toISOString();
+  const endDate = new Date(req.query.year, req.query.month - 1, req.query.day, 23, 59).toISOString();
+
+  const workTimes = await req.db.workTimes.findAll({
+    where: {
+      userId: req.user.id,
+      start: {
+        [Op.gte]: requestedDate,
+        [Op.lte]: endDate
+      }
+    }
+  });
   res.send(workTimes);
 });
 
