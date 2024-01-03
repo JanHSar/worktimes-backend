@@ -15,6 +15,16 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     xApiKey: DataTypes.STRING
   }, {
+    defaultScope: {
+      attributes: {
+        exclude: ['password']
+      }
+    },
+    scopes: {
+      auth: {
+        attributes: ['id', 'name', 'password']
+      }
+    },
     sequelize,
     modelName: 'user',
   }

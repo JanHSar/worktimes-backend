@@ -16,7 +16,7 @@ router.get('/', async function(req, res, next) {
 router.post('/auth', async function(req, res, next) {
   try {
     // Find User with credentials
-    const user = await req.db.user.findOne({
+    let user = await req.db.user.scope('auth').findOne({
       where: {
         name: req.body.userName,
         password: req.body.password
@@ -29,6 +29,13 @@ router.post('/auth', async function(req, res, next) {
       // Save key to db
       await user.update({xApiKey: xApiKey});
       await user.save();
+
+      // Return user with default scope
+      user = await req.db.user.findOne({
+        where: {
+          id: user.id
+        }
+      });
 
       res.send(user);
     } else {
@@ -77,5 +84,7 @@ router.get('/me', async function(req, res) {
 
   res.send(user);
 });
+
+function getMe() {}
 
 module.exports = router;
