@@ -25,3 +25,9 @@ Vordefinierte Benutzer sind:
 
     Name: Julia
     Passwort: wdUser
+
+# Start der API
+Zunächst die node Modules installieren, danach starten. 
+
+    npm install
+    npm start
