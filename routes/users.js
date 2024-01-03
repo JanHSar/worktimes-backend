@@ -51,4 +51,31 @@ async function generateXApiKey() {
   return xApiKey;
 }
 
+/**
+ * Get user by xApiKey
+ */
+router.get('/me', async function(req, res) {
+
+  // End if no xApiKey was provided
+  if(!req.headers['x-api-key']) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  // Get user with xApiKey
+  const xApiKey = req.headers['x-api-key'];
+  const user = await req.db.user.findOne({
+    where: {
+      xApiKey: xApiKey
+    }
+  });
+
+  if (!user) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  res.send(user);
+});
+
 module.exports = router;
